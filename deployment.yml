@@ -11,12 +11,14 @@ spec:
       labels:
         app: myapp
     spec:
+      imagePullSecrets:
+      - name: nexus-docker
       containers:
       - name: myapp
-        image: testimage
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        image: pavanikonda/k8s:latest
+        command:
+          - "sh"
+          - "-c"
+          - "java -jar /example.smallest-0.0.1-SNAPSHOT.war"
         ports:
         - containerPort: 8080
